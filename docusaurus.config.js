@@ -1,6 +1,7 @@
 const lightCodeTheme = require("prism-react-renderer/themes/github");
 const darkCodeTheme = require("prism-react-renderer/themes/dracula");
 const path = require("path");
+const gaTrackingID = process.env.GOOGLE_ANALYTICS_GTAG ?? "";
 
 /** @type {import('@docusaurus/types').DocusaurusConfig} */
 module.exports = {
@@ -30,10 +31,11 @@ module.exports = {
     path.resolve("src/plugins/fathom"),
     path.resolve("src/plugins/stars"),
     '@docusaurus/plugin-ideal-image',
-    ["@docusaurus/plugin-google-gtag",{
-      trackingID: process.env.GOOGLE_ANALYTICS_GTAG,
-      anonymizeIP: true,
-    } ]
+    (gaTrackingID !== "") ?
+      ["@docusaurus/plugin-google-gtag",{
+        trackingID: gaTrackingID,
+        anonymizeIP: true,
+      }]:null
   ],
   title: "Buf®",
   tagline: "Building a better way to work with Protocol Buffers",
