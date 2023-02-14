@@ -89,7 +89,7 @@ $ echo $?
 
 :::tip learn more
 `buf build` is a powerful tool there's much more to know than what we can cover here, check out
-the [Building With Buf](/build/usage) page.
+the [Building With Buf](/build/explanation) page.
 :::
 
 ## 2 Generate Code {#generate-code}
