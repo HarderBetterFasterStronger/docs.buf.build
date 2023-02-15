@@ -88,6 +88,17 @@ steps:
       buf_api_token: ${{ secrets.BUF_API_TOKEN }}
 ```
 
+Optionally, you can supply a `github_token` input so that any GitHub API requests are authenticated. This may prevent rate
+limit issues when running on GitHub hosted runners:
+
+```yaml
+steps:
+  - uses: actions/checkout@v2
+  - uses: bufbuild/buf-setup-action@v1.14.0
+    with:
+      github_token: ${{ github.token }}
+```
+
 ## `buf-lint`
 
 Now that you have installed `buf`, let's configure lint. The `buf-lint` action
