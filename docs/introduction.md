@@ -1,6 +1,7 @@
 ---
 id: introduction
 title: What can we help you find?
+hide_table_of_contents: true
 ---
 
 import { Card, Cards } from "@site/src/components/Cards";

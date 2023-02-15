@@ -179,7 +179,7 @@ blockquote {
 
 .card {
   min-height: 100%;
-  background-color: #f6f8fa;
+  background-color: #fff;
   --ifm-link-color: var(--ifm-color-emphasis-800);
   --ifm-link-hover-color: var(--ifm-color-emphasis-700);
   --ifm-link-hover-decoration: none;
@@ -193,4 +193,8 @@ blockquote {
   background-color: #fff;
   border-color: var(--ifm-color-primary);
   box-shadow: 0 3px 6px 0 rgba(0,0,0,.2)
+}
+
+.searchBox_src-theme-SearchBar-styles-module {
+  margin-left: 0rem !important;
 }

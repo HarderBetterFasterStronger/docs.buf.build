@@ -151,7 +151,7 @@ function DocSearch({ contextualSearch, ...props }) {
   const translatedSearchLabel = translate({
     id: "theme.SearchBar.label",
     // message: 'Search',
-    message: "Search docs...",
+    message: "Search\xA0docs...",
     description: "The ARIA label and placeholder for search button"
   });
 

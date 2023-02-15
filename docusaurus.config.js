@@ -69,10 +69,10 @@ module.exports = {
       // For the "github" appearance, the stargazer count for the GitHub repository is
       // rendered as the link label (this requires a "href" to a GitHub repository).
       hideOnScroll: false,
-      title: "Docs",
+      title: "",
       logo: {
         alt: "Buf Logo",
-        src: "img/logo.svg",
+        src: "img/logo-docs.svg",
         href: "https://docs.buf.build",
         target: "_self"
       },
@@ -84,14 +84,29 @@ module.exports = {
           position: "left"
         },
         {
-          href: "https://buf.build/blog",
-          label: "Blog",
-          position: "right"
+          href: "/introduction",
+          label: "Home",
+          position: "left"
         },
         {
-          href: "https://buf.build/careers",
-          label: "Careers",
-          position: "right"
+          href: "/installation",
+          label: "Quick\xA0Start",
+          position: "left"
+        },
+        {
+          href: "/tutorials/getting-started-with-buf-cli",
+          label: "Guides",
+          position: "left"
+        },
+        {
+          href: "/build/usage",
+          label: "Manuals",
+          position: "left"
+        },
+        {
+          href: "/configuration/overview",
+          label: "Reference",
+          position: "left"
         },
         {
           href: "https://buf.build/login",
@@ -105,18 +120,6 @@ module.exports = {
           position: "right",
           bufAppearance: "dark-button"
         },
-        {
-          href: "https://buf.build/links/slack",
-          label: "Slack",
-          position: "right",
-          bufAppearance: "slack"
-        },
-        {
-          href: "https://github.com/bufbuild/buf",
-          label: "GitHub",
-          position: "right",
-          bufAppearance: "github"
-        }
       ]
     },
     footer: {

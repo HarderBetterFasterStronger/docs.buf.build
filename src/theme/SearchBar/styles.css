@@ -90,6 +90,6 @@
 }
 @media (min-width: 1250px) {
   .DocSearch-Button-Container {
-    min-width: 350px;
+    min-width: 200px;
   }
 }
