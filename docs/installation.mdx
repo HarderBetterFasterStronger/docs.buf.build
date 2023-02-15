@@ -1,9 +1,39 @@
 ---
 id: installation
-title: Installation
+title: Get started with the Buf CLI
+hide_table_of_contents: true
 ---
 
-## Homebrew
+The Buf CLI is a developer tool that enables building and management of APIs through the command line. It's easy to
+install, compatible with macOS, Windows, and Linux, and equipped with features to enhance the developer experience
+with Buf. You can use the Buf CLI to:
+
+* Features include linting, code generation, formatting, and breaking change detection.
+* Improve API development and maintenance efficiency.
+* Buf CLI seamlessly integrates with your workflow.
+
+---
+
+### Install the Buf CLI
+
+To install the CLI, you can either utilize an installation script or download and extract an archive file that
+corresponds to the version of your operating system from the command line.
+
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+<Tabs
+groupId="var-selection"
+defaultValue="temporary"
+values={[
+{label: 'Homebrew', value: 'homebrew'},
+{label: 'NPM', value: 'npm'},
+{label: 'GitHub', value: 'gitHub'},
+{label: 'Source', value: 'source'},
+{label: 'Docker', value: 'docker'},
+{label: 'Windows', value: 'windows'},
+]}>
+<TabItem value="homebrew">
 
 You can install `buf` on macOS or Linux using [Homebrew](https://brew.sh):
 
@@ -18,7 +48,8 @@ This installs:
 - Fish completion for `buf`.
 - Zsh completion for `buf`.
 
-## NPM
+</TabItem>
+<TabItem value="npm">
 
 `buf` is available via [npm](https://www.npmjs.com/package/@bufbuild/buf):
 
@@ -35,7 +66,8 @@ To execute `buf` from the command line, you can use `npx`:
 npx buf --version
 ```
 
-## GitHub Releases
+</TabItem>
+<TabItem value="gitHub">
 
 `buf` is released via the [bufbuild/buf](https://github.com/bufbuild/buf)
 repository.
@@ -43,9 +75,9 @@ repository.
 Two types of assets are available:
 
 - The single `buf`, `protoc-gen-buf-breaking`, and `protoc-gen-buf-lint`
-  binaries.
+binaries.
 - A tarball containing the binaries, bash completion, fish completion, and zsh
-  completion.
+completion.
 
 See [the Releases page](https://github.com/bufbuild/buf/releases) for the
 current release.
@@ -61,10 +93,10 @@ To install just the `buf` binary to `/usr/local/bin` for version `1.14.0`:
 # Substitute VERSION for the current released version.
 BIN="/usr/local/bin" && \
 VERSION="1.14.0" && \
-  curl -sSL \
-    "https://github.com/bufbuild/buf/releases/download/v${VERSION}/buf-$(uname -s)-$(uname -m)" \
-    -o "${BIN}/buf" && \
-  chmod +x "${BIN}/buf"
+curl -sSL \
+"https://github.com/bufbuild/buf/releases/download/v${VERSION}/buf-$(uname -s)-$(uname -m)" \
+-o "${BIN}/buf" && \
+chmod +x "${BIN}/buf"
 ```
 
 `/usr/local/bin` should be on your `$PATH`.
@@ -74,7 +106,7 @@ To uninstall from `/usr/local/bin`:
 ```sh
 # Substitute BIN for your bin directory.
 BIN="/usr/local/bin" && \
-  rm -f "${BIN}/buf"
+rm -f "${BIN}/buf"
 ```
 
 ### Tarball
@@ -88,9 +120,9 @@ for version `1.14.0`:
 # Substitute VERSION for the current released version.
 PREFIX="/usr/local" && \
 VERSION="1.14.0" && \
-  curl -sSL \
-    "https://github.com/bufbuild/buf/releases/download/v${VERSION}/buf-$(uname -s)-$(uname -m).tar.gz" | \
-    tar -xvzf - -C "${PREFIX}" --strip-components 1
+curl -sSL \
+"https://github.com/bufbuild/buf/releases/download/v${VERSION}/buf-$(uname -s)-$(uname -m).tar.gz" | \
+tar -xvzf - -C "${PREFIX}" --strip-components 1
 ```
 
 The binaries are installed to `/usr/local/bin`, which should be on your `$PATH`.
@@ -101,12 +133,12 @@ To uninstall from `/usr/local`:
 # Substitute PREFIX for your install prefix.
 PREFIX="/usr/local" && \
 rm -f \
-  "${PREFIX}/bin/buf" \
-  "${PREFIX}/bin/protoc-gen-buf-breaking" \
-  "${PREFIX}/bin/protoc-gen-buf-lint" \
-  "${PREFIX}/etc/bash_completion.d/buf" \
-  "${PREFIX}/etc/fish/vendor_completions.d/buf.fish"
-  "${PREFIX}/etc/zsh/site-functions/_buf"
+"${PREFIX}/bin/buf" \
+"${PREFIX}/bin/protoc-gen-buf-breaking" \
+"${PREFIX}/bin/protoc-gen-buf-lint" \
+"${PREFIX}/etc/bash_completion.d/buf" \
+"${PREFIX}/etc/fish/vendor_completions.d/buf.fish"
+"${PREFIX}/etc/zsh/site-functions/_buf"
 ```
 
 ### Verifying a release
@@ -124,12 +156,13 @@ is installed):
 ```sh
 # Substitute VERSION for the current released version.
 VERSION="1.14.0" && \
-  curl -OL https://github.com/bufbuild/buf/releases/download/v${VERSION}/sha256.txt && \
-  curl -OL https://github.com/bufbuild/buf/releases/download/v${VERSION}/sha256.txt.minisig && \
-  minisign -Vm sha256.txt -P RWQ/i9xseZwBVE7pEniCNjlNOeeyp4BQgdZDLQcAohxEAH5Uj5DEKjv6
+curl -OL https://github.com/bufbuild/buf/releases/download/v${VERSION}/sha256.txt && \
+curl -OL https://github.com/bufbuild/buf/releases/download/v${VERSION}/sha256.txt.minisig && \
+minisign -Vm sha256.txt -P RWQ/i9xseZwBVE7pEniCNjlNOeeyp4BQgdZDLQcAohxEAH5Uj5DEKjv6
 ```
 
-## From source
+</TabItem>
+<TabItem value="source">
 
 The binary can be installed from source if `go` is installed, however we
 recommend using one of the release assets instead.
@@ -138,10 +171,11 @@ recommend using one of the release assets instead.
 # Substitute GOBIN for your bin directory
 # Leave unset to default to $GOPATH/bin
 GO111MODULE=on GOBIN=/usr/local/bin go install \
-  github.com/bufbuild/buf/cmd/buf@v1.14.0
+github.com/bufbuild/buf/cmd/buf@v1.14.0
 ```
 
-## Using the Docker image
+</TabItem>
+<TabItem value="docker">
 
 Buf ships a Docker image ([bufbuild/buf](https://hub.docker.com/r/bufbuild/buf))
 that enables you to use `buf` as part of your Docker workflow.
@@ -151,10 +185,12 @@ For example, you can run `buf lint` with this command:
 ```terminal
 $ docker run --volume "$(pwd):/workspace" --workdir /workspace bufbuild/buf lint
 ---
-google/type/datetime.proto:17:1:Package name "google.type" should be suffixed with a correctly formed version, such as "google.type.v1".
+google/type/datetime.proto:17:1:Package name "google.type" should be suffixed with a correctly formed version,
+such as "google.type.v1".
 ```
 
-## Windows support {#windows}
+</TabItem>
+<TabItem value="windows">
 
 ### Scoop
 
@@ -175,5 +211,13 @@ scoop update buf
 Buf offers Windows binaries for both the `x86_64` and `arm64` architectures. You
 can download the latest binaries from [GitHub Releases][releases].
 
-[releases]: https://github.com/bufbuild/buf/releases/latest
-[scoop]: https://scoop.sh
+</TabItem>
+</Tabs>
+
+### Next Steps
+
+Learn how to use the Buf CLI to easily build, lint, format and generate code for your project in our [15-minute
+tutorial](/tutorials/getting-started-with-buf-cli).
+
+[releases]:   https://github.com/bufbuild/buf/releases/latest
+[scoop]:   https://scoop.sh
