@@ -25,6 +25,17 @@ Registry, including:
 * Utilise dependency management for well known types
 * Build an API using Remote Packages
 
+## Before you begin
+
+It's always a good idea to check if the locally installed version of `buf` is up-to-date. Open your shell and make sure
+you have the correct version installed.
+
+```terminal
+$ buf --version
+---
+1.14.0
+```
+
 ### Clone the Git repository {#clone-the-git-repository}
 
 First, clone the Git repository that contains the starter code for the `PetStore` service. From the development

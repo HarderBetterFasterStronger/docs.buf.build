@@ -29,6 +29,16 @@ including:
 * How to use the Buf CLI to lint & format your API schemas
 * Detect and prevent breaking changes in your APIs
 
+## Before you begin
+
+Let's check the version of `buf` you'll be using is up-to-date.
+
+```terminal
+$ buf --version
+---
+1.14.0
+```
+
 ## Clone the Git repository {#clone-the-git-repository}
 
 First, clone the Git repository that contains the starter code for the `PetStore` service. From the development
