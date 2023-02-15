@@ -143,12 +143,6 @@ const sidebars = {
                                 "bsr/reflection/usage",
                                 "bsr/reflection/prototransform",
                             ],
-                            customProps: {
-                                badge: {
-                                    label: "new",
-                                    severity: "info"
-                                }
-                            },
                             collapsed: false
                         },
                         "bsr/documentation",
@@ -171,12 +165,6 @@ const sidebars = {
                                 "bsr/remote-plugins/usage",
                                 "bsr/remote-plugins/migrating-from-alpha",
                             ],
-                            customProps: {
-                                badge: {
-                                    label: "new",
-                                    severity: "info"
-                                }
-                            },
                             collapsed: false
                         },
                         {
@@ -188,12 +176,6 @@ const sidebars = {
                                 "bsr/remote-packages/npm",
                                 "bsr/remote-packages/migrating-from-alpha"
                             ],
-                            customProps: {
-                                badge: {
-                                    label: "new",
-                                    severity: "info"
-                                }
-                            },
                             collapsed: false
                         }
                     ],
