@@ -198,3 +198,7 @@ blockquote {
 .searchBox_src-theme-SearchBar-styles-module {
   margin-left: 0rem !important;
 }
+
+.swizzled_src-theme-Logo-styles-module {
+  min-width: 91px;
+}

@@ -13,83 +13,48 @@
  */
 
 :root {
-  --docsearch-primary-color: var(--ifm-color-primary);
-  --docsearch-text-color: var(--ifm-font-color-base);
+    --docsearch-primary-color: var(--ifm-color-primary);
+    --docsearch-text-color: var(--ifm-font-color-base);
 }
 
 .DocSearch-Button {
-  margin: 0;
-  transition: all var(--ifm-transition-fast) var(--ifm-transition-timing-default);
-  background: white;
-  border-radius: 2px;
-  border: 1px solid transparent;
+    margin: 0;
+    transition: all var(--ifm-transition-fast) var(--ifm-transition-timing-default);
+    background: white;
+    border-radius: 2px;
+    border: 1px solid transparent;
 }
+
 .DocSearch-Button:focus,
 .DocSearch-Button:hover {
-  border-color: #161ede;
-  box-shadow: none;
+    border-color: #161ede;
+    box-shadow: none;
 }
 
 .DocSearch-Container {
-  z-index: calc(var(--ifm-z-index-fixed) + 1);
+    z-index: calc(var(--ifm-z-index-fixed) + 1);
 }
 
 .DocSearch-Button-Placeholder {
-  color: var(--buf-searchbox-placeholder-color);
-  font-family: var(--buf-sans-font) !important;
-  font-weight: 300;
-}
-
-/* Hide the search icon (we only need it for very small screens) */
-.DocSearch-Search-Icon {
-  display: none;
+    color: var(--buf-searchbox-placeholder-color);
+    font-family: var(--buf-sans-font) !important;
+    font-weight: 300;
 }
 
 /* Do not show the keyboard hints */
 .DocSearch-Button-Keys {
-  display: none;
+    display: none;
 }
 
-/* Override default behaviour - keep the placeholder visible */
-@media (max-width: 750px) {
-  .DocSearch-Button-Placeholder {
-    display: flex !important; /* "important" is required for the full build - the original CSS file is included as well */
-  }
-}
-
-/* Adjust the placeholder for a small range where it is too wide for the layout3 */
-@media (min-width: 997px) and (max-width: 1000px) {
-  .DocSearch-Button-Placeholder {
-    display: inline-block;
-    white-space: nowrap;
-    max-width: 90px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-}
-
-/* For very small screens, show only the icon */
-@media (max-width: 510px) {
-  .DocSearch-Search-Icon {
+.DocSearch-Search-Icon {
     display: block;
-  }
-  .DocSearch-Button-Placeholder {
+}
+
+.DocSearch-Button-Placeholder {
     display: none !important; /* "important" is required for the full build - the original CSS file is included as well */
-  }
-  .DocSearch-Button {
+}
+
+.DocSearch-Button {
     background: transparent !important; /* "important" is required for the full build - the original CSS file is included as well */
     border-radius: 40px !important; /* "important" is required for the full build - the original CSS file is included as well */
-  }
-}
-
-/* Increase the size of the search bar, depending on available width */
-@media (min-width: 1100px) {
-  .DocSearch-Button-Container {
-    min-width: 200px;
-  }
-}
-@media (min-width: 1250px) {
-  .DocSearch-Button-Container {
-    min-width: 200px;
-  }
 }

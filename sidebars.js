@@ -24,7 +24,7 @@ const sidebars = {
             ],
             collapsed: false,
         },
-        "editor-integration",
+        "about",
         "faq",
         "contact"
     ],
@@ -239,6 +239,7 @@ const sidebars = {
                     ],
                     collapsed: false
                 },
+                "editor-integration",
                 "reference/workspaces",
                 "reference/images",
                 "reference/inputs",
