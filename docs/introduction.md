@@ -22,7 +22,7 @@ import { Card, Cards } from "@site/src/components/Cards";
   <Card
     image=""
     name="🚀 Getting Started with the Buf Schema Registry"
-    url="/tutorials/getting-started-with-buf-cli"
+    url="/tutorials/getting-started-with-bsr"
     description="Say hello to confidence, simplicity, and ease of use with the Buf Schema Registry."
   />
   <Card
