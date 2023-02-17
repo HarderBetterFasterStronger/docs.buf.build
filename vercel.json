@@ -146,6 +146,10 @@
       "permanent": true
     },
     {
+      "source": "/tour/introduction",
+      "destination": "/tutorials/getting-started-with-buf-cli"
+    },
+    {
       "source": "/build",
       "destination": "/build/usage"
     },
