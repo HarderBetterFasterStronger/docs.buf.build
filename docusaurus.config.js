@@ -78,11 +78,6 @@ module.exports = {
             },
             items: [
                 {
-                    href: "/introduction",
-                    label: "Home",
-                    position: "left"
-                },
-                {
                     href: "/installation",
                     label: "Quick\xA0Start",
                     position: "left"

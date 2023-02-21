@@ -24,11 +24,6 @@ const sidebars = {
             ],
             collapsed: false,
         },
-        "about",
-        "faq",
-        "contact"
-    ],
-    guides: [
         {
             type: "category",
             label: "Guides",
@@ -57,9 +52,7 @@ const sidebars = {
                 },
             ],
             collapsed: false
-        }
-    ],
-    manuals: [
+        },
         {
             type: "category",
             label: "Manuals",
@@ -190,9 +183,7 @@ const sidebars = {
                 },
             ],
             collapsed: false
-        }
-    ],
-    reference: [
+        },
         {
             type: "category",
             label: "Reference",
@@ -273,6 +264,9 @@ const sidebars = {
             ],
             collapsed: false
         },
+        "about",
+        "faq",
+        "contact"
     ],
 };
 
