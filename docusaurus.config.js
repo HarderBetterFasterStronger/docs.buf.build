@@ -78,17 +78,12 @@ module.exports = {
             },
             items: [
                 {
-                    href: "/installation",
-                    label: "Quick\xA0Start",
-                    position: "left"
-                },
-                {
                     href: "/tutorials/getting-started-with-buf-cli",
                     label: "Guides",
                     position: "left"
                 },
                 {
-                    href: "/build/usage",
+                    href: "/manuals/cli/overview",
                     label: "Manuals",
                     position: "left"
                 },
@@ -101,6 +96,16 @@ module.exports = {
                     // The search bar must be the first item on the left - otherwise, the layout of the
                     // overridden navbar will break.
                     type: "search",
+                    position: "right"
+                },
+                {
+                    href: "https://buf.build/blog",
+                    label: "Blog",
+                    position: "right"
+                },
+                {
+                    href: "https://buf.build/careers",
+                    label: "Careers",
                     position: "right"
                 },
                 {

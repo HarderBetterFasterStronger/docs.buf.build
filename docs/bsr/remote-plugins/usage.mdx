@@ -1,10 +1,23 @@
 ---
 id: usage
-title: Usage
+title: Effortless generation with Buf remote plugins
 ---
 
 > We highly recommend completing [the tour](../../tutorials/getting-started-with-buf-cli.md#generate-code) to
 > get an overview of `buf generate` with remote plugins.
+
+Protobuf code generation is a challenging process for developers due to the complexities of working with protoc and
+plugins. This challenge is compounded as code generation is scaled across multiple developers, with different
+languages and runtime requirements for plugins.
+
+To overcome these challenges, organizations and open-source projects often develop their own homegrown Protobuf
+tooling to simplify the developer experience and maintain consistent output. However, these solutions are often
+difficult to maintain over time, and knowledge of the solutions can be lost as staff leave the organization or project.
+
+To provide a more streamlined approach to code generation, Buf's Remote Plugins remove the need for developers to
+manage, download, or run plugins on their local machines. This approach ensures a consistent environment and
+provides a necessary solution for the Protobuf ecosystem. Let's take a look at how you can simplify your code
+generation workflow with remote packages:
 
 ## Configuration
 
@@ -14,11 +27,10 @@ specify [remote plugins](overview.mdx) to perform code generation. For more
 information on the `buf.gen.yaml` configuration, see the
 [reference](../../configuration/v1/buf-gen-yaml.md).
 
-Buf verifies and maintains the commonly-used plugins used across the Protobuf
-ecosystem. To discover all publicly-available plugins, go to
-[buf.build/plugins](https://buf.build/plugins).
+Buf verifies and maintains the commonly-used plugins used across the Protobuf ecosystem. To discover all
+publicly available plugins, go to [buf.build/plugins](https://buf.build/plugins).
 
-## Choose your input
+## 1 Choose your input
 
 Remote plugins generate code for [inputs](../../reference/inputs.md). An input
 can be a git repository, tarball, zip file, a or local directory containing
@@ -46,7 +58,7 @@ lint:
 See the [build](../../build/usage.md) documentation for full details on how to
 configure modules to build with `buf`.
 
-## Create a [`buf.gen.yaml`](/configuration/v1/buf-gen-yaml)
+## 2 Create a [`buf.gen.yaml`](/configuration/v1/buf-gen-yaml)
 
 Now that you have an [input](../../reference/inputs.md) to generate code for, we
 need to define a [`buf.gen.yaml`](/configuration/v1/buf-gen-yaml) and specify
@@ -58,7 +70,7 @@ examples for common languages and RPC frameworks:
 
 import GenYaml from "./_gen-yaml.mdx";
 
-<GenYaml />
+<GenYaml/>
 
 Note, we're using the `plugin` key to reference a remote plugin. More
 information can be
@@ -74,7 +86,7 @@ information, see the
 > possible to reference both local and remote plugins within a single template
 > file.
 
-## Run generate
+## 3 Run generate
 
 To generate using the module and `buf.gen.yaml` defined in your current
 directory:
@@ -86,7 +98,7 @@ $ buf generate
 The `buf generate` command will:
 
 - Send the Protobuf files specified in your input to the Buf Schema Registry
-  remote plugin executor.
+remote plugin executor.
 - Invoke each plugin specified in your `buf.gen.yaml`.
 - Send the results back, and unpack them on your local file system.
 
@@ -117,11 +129,11 @@ up with this file structure:
 
 import Tree from "./_tree.mdx";
 
-<Tree />
+<Tree/>
 
-## Common use cases
+## 4 Common use cases
 
-### protoc-gen-go
+### 4.1 protoc-gen-go
 
 [`protoc-gen-go`](https://github.com/protocolbuffers/protobuf-go) generates
 message and enum stubs for Golang. The BSR hosts this plugin at
@@ -136,7 +148,7 @@ plugins:
     opt: paths=source_relative
 ```
 
-### protoc-gen-go + protoc-gen-validate
+### 4.2 protoc-gen-go + protoc-gen-validate
 
 [`protoc-gen-validate`](https://github.com/bufbuild/protoc-gen-validate) is a
 plugin that generates polyglot message validators. The BSR hosts this plugin
@@ -159,7 +171,7 @@ plugins:
     opt: paths=source_relative
 ```
 
-### grpc-go
+### 4.3 grpc-go
 
 [`protoc-gen-go-grpc`](https://github.com/grpc/grpc-go/tree/master/cmd/protoc-gen-go-grpc)
 generates Golang service stubs for gRPC. The BSR hosts this plugin at
@@ -182,7 +194,7 @@ plugins:
     opt: paths=source_relative
 ```
 
-### connect-go
+### 4.4 connect-go
 
 [Connect-Go](https://connect.build/docs/go/getting-started)
 is a slim library for building browser and
@@ -209,7 +221,7 @@ plugins:
     opt: paths=source_relative
 ```
 
-### connect-web
+### 4.5 connect-web
 
 [Connect-Web](https://connect.build/docs/web/getting-started) is a simple
 library to call remote procedures from a web browser. Unlike REST, you get a
@@ -236,7 +248,7 @@ plugins:
     out: gen/es
 ```
 
-### connect-swift
+### 4.6 connect-swift
 
 [Connect-Swift](https://connect.build/docs/swift/getting-started)
 is a small library that provides support for using generated,
@@ -263,3 +275,14 @@ plugins:
     opt: Visibility=Public
     out: gen/swift
 ```
+
+## Conclusion
+
+Code generation with Protobuf can be a complex and challenging process, which becomes more difficult when scaling to
+multiple developers. Remote plugins are the answer. Buf's remote plugins offer a streamlined approach, removing the
+need for local management and maintenance.
+
+## Next Steps
+
+If you're interested in learning more about code generation with Protobuf, or how Buf can help
+streamline your development process, be sure to check out [Supercharging your project with Remote Packages](/how-to/use-remote-packages)

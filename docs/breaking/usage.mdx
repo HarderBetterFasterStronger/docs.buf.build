@@ -1,12 +1,24 @@
 ---
 id: usage
-title: Usage
+title: "Mastering Breaking Change Detection"
+description: "Learn how to effectively use Buf breaking change detection with this comprehensive how-to guide."
 ---
+
+Welcome to this how-to guide on breaking change detection with the Buf CLI!
+
+If you work with protobufs, you may have experienced the need to change the schema of your data, which can result in
+breaking changes to your codebase or your consumers. The Buf CLI helps you detect these changes before they
+become a problem, allowing you to maintain backwards compatibility and avoid potential errors.
+
+In this guide, we will walk you through the process of using the Buf CLI to detect breaking changes in your protobuf
+schemas. We will cover the steps for defining a module, running breaking change detection, and common use cases.
+Whether you are a seasoned developer or new to protobufs, this guide will provide you with the knowledge and skills
+to implement breaking change detection in your projects.
 
 > We recommend completing [the tour](../docs/tutorials/getting-started-with-buf-cli.md#detect-breaking-changes) for an
 > overview of breaking change detection with the `buf breaking` command.
 
-## Define a module
+## 1 Define a module {#define-a-module}
 
 To get started, create a [module](../bsr/overview.mdx#modules) by adding a
 [`buf.yaml`](../configuration/v1/buf-yaml.md) file to the root of the directory
@@ -27,7 +39,7 @@ lint:
     - DEFAULT
 ```
 
-## Run breaking change detection
+## 2 Run breaking change detection {#run-breaking-change-detection}
 
 You can run `buf breaking` on your module by specifying the filepath to the
 directory containing the `buf.yaml` and choosing an
@@ -45,9 +57,9 @@ The above `buf breaking` command:
 - Copies all Protobuf files into memory.
 - Compiles all Protobuf files.
 - Clones the head of the `main` branch of the `git` repository located at local
-  directory `.git` into memory.
+directory `.git` into memory.
 - Compiles all Protobuf files on the `main` branch per the configuration on that
-  branch.
+branch.
 - Compares the compilation results for breaking changes.
 
 If there are errors, they are printed out in a `file:line:column:message` format
@@ -70,11 +82,11 @@ $ buf breaking --against '.git#branch=main' --error-format=json
 import Examples from "@site/src/components/Examples";
 
 <Examples
-  subject="breaking change detection with the Buf CLI"
-  projects={["breaking-change-detection"]}
+    subject="breaking change detection with the Buf CLI"
+    projects={["breaking-change-detection"]}
 />
 
-## Common use cases
+## 3 Common use cases {#common-use-cases}
 
 `buf`'s breaking change detector works by comparing a previous version of your
 Protobuf schema to your current version. `buf` considers your current schema to
@@ -150,7 +162,7 @@ $ buf breaking --against "https://github.com/foo/bar/archive/${COMMIT}.zip#strip
 # to compare against
 ```
 
-## Deleted references
+## 4 Deleted references {#deleted-references}
 
 `buf breaking` is able to produce references to your current files even if a
 type is moved between files. For example, if we moved the `Date` message to
@@ -169,7 +181,7 @@ $ buf breaking --against "https://github.com/googleapis/googleapis/archive/${GOO
 google/type/date.proto:50:3:Field "3" on message "Date" changed type from "int32" to "string".
 ```
 
-## Limit to specific files
+## 5 Limit to specific files {#limit-to-specific-files}
 
 By default, `buf` builds all files under the `buf.yaml` configuration file. You
 can instead manually specify the file or directory paths to run breaking change
@@ -193,7 +205,7 @@ too:
 $ buf breaking --against .git#branch=main --path path/to/foo.proto --path path/to/bar.proto --config '{"breaking":{"use":["WIRE_JSON"]}}'
 ```
 
-## Docker
+## 6 Docker {#docker}
 
 Buf ships a Docker image [bufbuild/buf](https://hub.docker.com/r/bufbuild/buf)
 that enables you to use `buf` as part of your Docker workflow. For example:
@@ -205,7 +217,7 @@ $ docker run \
   bufbuild/buf breaking --against '.git#branch=main'
 ```
 
-## Advanced use cases
+## 7 Advanced use cases {#advanced-use-cases}
 
 Due to the nature of inputs, `buf` happily compares just about anything. You may
 have an advanced use case, so we want to demonstrate the capabilities of `buf`
@@ -233,3 +245,21 @@ $ buf breaking \
 ---
 google/cloud/asset/v1/assets.proto:27:1:File option "cc_enable_arenas" changed from "false" to "true".
 ```
+
+## Conclusion
+
+`buf breaking` is a powerful command-line tool that makes detecting breaking changes in your protobuf
+schema easier than ever. With just a few simple steps, you can set up your module and run a simple command to compare
+your current schema to a previous version, and receive an easy-to-read output that highlights any breaking changes that
+have occurred.
+
+This guide has outlined the process of defining a module, running breaking change detection, and provided some common
+use cases. By following these steps and best practices, you can improve the quality and maintainability of your
+Protobuf schema and catch any issues before they cause major problems.
+
+## Next steps
+
+For more information on `buf breaking`, check out our [manual](/breaking/overview).
+
+If you use GitHub Actions in your organization, you can learn how to add breaking change detection to
+your [GitHub Actions workflow](/ci-cd/github-actions).

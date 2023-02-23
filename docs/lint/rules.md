@@ -1,6 +1,6 @@
 ---
 id: rules
-title: Rules and categories
+title: Lint rules & categories
 ---
 
 > The rules and categories described here belong to the latest
@@ -434,7 +434,7 @@ enum Foo {
 }
 ```
 
-The suffix is [configurable](configuration.md#enum_zero_value_suffix).
+The suffix is [configurable](overview.md#enum_zero_value_suffix).
 
 All enums should have a zero value. `proto3` does not differentiate between set
 and unset fields, so if an enum field is not explicitly set, it defaults to the
@@ -489,7 +489,7 @@ service FooService {
 }
 ```
 
-There are [configuration options](configuration.md#rpc_allow_) associated with
+There are [configuration options](overview.md#rpc_allow_) associated with
 these three rules.
 
 #### `PACKAGE_VERSION_SUFFIX`
@@ -556,7 +556,7 @@ Service names inherently end up having a lot of overlap with package names, and
 service naming often ends up inconsistent as a result across a larger Protobuf
 schema. Enforcing a consistent suffix takes away some of this inconsistency.
 
-The suffix is [configurable](configuration.md#service_suffix). For example, if
+The suffix is [configurable](overview.md#service_suffix). For example, if
 you have this configuration in your `buf.yaml`...
 
 ```yaml title="buf.yaml"

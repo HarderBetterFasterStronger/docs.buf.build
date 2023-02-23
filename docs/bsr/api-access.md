@@ -1,6 +1,6 @@
 ---
 id: api-access
-title: API Access
+title: Working with the APIs
 ---
 
 Buf Schema Registries provide a web UI at their domain. For example, the web UI for the public

@@ -1,12 +1,21 @@
 ---
 id: usage
-title: Usage
+title: "Linting & formatting Protobuf"
+description: "Say goodbye to messy and buggy code with this one simple trick for perfectly formatted Protobuf!"
 ---
+
+As more and more developers adopt protobufs in their projects, it becomes increasingly important to ensure that
+the code is clean, consistent, and easy to read. This is where linting and formatting come in.
+
+Linting and formatting tools help to maintain the quality of the code by enforcing a set of rules for style, syntax,
+and best practices. They can catch errors early, make the code easier to understand, and reduce the amount of manual
+code review required. In this how-to guide, we will explore how to set up linting and formatting for protobufs
+in order to maintain code quality and consistency in your projects.
 
 > We recommend completing [the Tour of Buf](../tutorials/getting-started-with-buf-cli.md#lint-your-api) for an
 > overview of Protobuf linting with the `buf lint` command.
 
-## Define a module
+## 1 Define a module
 
 To get started linting your Protobuf sources, create a
 [Buf module](../bsr/overview.mdx#modules) by adding a
@@ -33,7 +42,7 @@ lint:
 As you can see, the default configuration applies the
 [`DEFAULT`](./rules.md#default) rules.
 
-## Run lint
+## 2 Run lint & format
 
 You can run `buf lint` on your module by specifying the filepath to the
 directory containing the `buf.yaml`. It uses the current directory by default,
@@ -53,7 +62,7 @@ The `buf lint` command performs these actions in order:
 
 import Examples from "@site/src/components/Examples";
 
-<Examples subject="linting Protobuf sources with Buf" projects={["linting"]} />
+<Examples subject="linting Protobuf sources with Buf" projects={["linting"]}/>
 
 ### Error syntax {#syntax}
 
@@ -62,19 +71,19 @@ Any lint errors discovered are printed out in this format:
 import Syntax from "@site/src/components/Syntax";
 
 <Syntax
-  title="Lint error syntax"
-  examples={[
-    'pet/v1/pet.proto:47:9:Service name "PetStore" should be suffixed with "Service".'
-  ]}
-  segments={[
-    { label: "file", kind: "variable" },
-    { separator: ":" },
-    { label: "line", kind: "variable" },
-    { separator: ":" },
-    { label: "column", kind: "variable" },
-    { separator: ":" },
-    { label: "message", kind: "variable" }
-  ]}
+    title="Lint error syntax"
+    examples={[
+        'pet/v1/pet.proto:47:9:Service name "PetStore" should be suffixed with "Service".'
+    ]}
+    segments={[
+        {label: "file", kind: "variable"},
+        {separator: ":"},
+        {label: "line", kind: "variable"},
+        {separator: ":"},
+        {label: "column", kind: "variable"},
+        {separator: ":"},
+        {label: "message", kind: "variable"}
+    ]}
 />
 
 Here's a full example output:
@@ -87,7 +96,7 @@ pet/v1/pet.proto:42:10:Field name "petID" should be lower_snake_case, such as "p
 pet/v1/pet.proto:47:9:Service name "PetStore" should be suffixed with "Service".
 ```
 
-### JSON output {#json}
+### 2.1 JSON output {#json}
 
 You can print lint output as JSON:
 
@@ -99,7 +108,7 @@ $ buf lint --error-format=json
 {"path":"pet/v1/pet.proto","start_line":47,"start_column":9,"end_line":47,"end_column":17,"type":"SERVICE_SUFFIX","message":"Service name \"PetStore\" should be suffixed with \"Service\"."}
 ```
 
-### Copy errors into your configuration {#copy}
+### 2.2 Copy errors into your configuration {#copy}
 
 We can output errors in a format that you can copy into your
 [`buf.yaml`](../configuration/v1/buf-yaml.md) configuration file. This enables
@@ -119,7 +128,17 @@ lint:
       - pet/v1/pet.proto
 ```
 
-## Common use cases
+### 2.3 Automatically format your `.proto` files
+
+The `buf format` command rewrites `.proto` files in-place according to an opinionated [style](format/style.md). Rewrite
+the file(s) in-place with `-w`. For example,
+
+```terminal
+# Rewrite a single file in-place
+$ buf format -w
+```
+
+## 3 Common use cases
 
 `buf` can lint [inputs](../reference/inputs.md) beyond your local Protobuf
 files, such as [Git repositories](../reference/inputs.md#git) and
@@ -142,7 +161,7 @@ For remote locations that require authentication, see
 [HTTPS Authentication](../reference/inputs.md#https) and
 [SSH Authentication](../reference/inputs.md#ssh).
 
-## Limit to specific files
+## 4 Limit to specific files
 
 By default, the `buf` CLI builds all files under your
 [`buf.yaml`](../configuration/v1/buf-yaml.md) configuration file. But you can
@@ -167,7 +186,7 @@ $ buf lint \
   --config '{"version":"v1","lint":{"use":["BASIC"]}}'
 ```
 
-## Docker
+## 5 Docker
 
 Buf ships a Docker image, [`bufbuild/buf`][image], that enables you to use `buf`
 as part of your Docker workflow. Here's an example:
@@ -179,5 +198,22 @@ $ docker run \
   bufbuild/buf lint
 ```
 
-[image]: https://hub.docker.com/r/bufbuild/buf
-[protoc]: https://github.com/protocolbuffers/protobuf
+[image]  https://hub.docker.com/r/bufbuild/buf
+[protoc]  https://github.com/protocolbuffers/protobuf
+
+
+## Conclusion
+
+In conclusion, linting your Protobuf sources with Buf is an important step in ensuring the consistency and correctness
+of your Protobuf definitions. By defining a Buf module and running buf lint, you can quickly identify and correct issues
+with your Protobuf files, such as field naming conventions, package name suffixes, and more. You can also use the buf
+format command to automatically rewrite your `.proto` files according to an opinionated style. By following the steps
+outlined in this guide, you can improve the quality of your Protobuf definitions and avoid errors and inconsistencies
+in your APIs.
+
+## Next steps
+
+Check out our [style guide](/best-practices/style-guide) for a greater understanding of protobuf development best
+practices.
+
+

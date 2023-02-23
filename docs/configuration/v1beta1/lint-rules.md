@@ -410,7 +410,7 @@ enum Foo {
 }
 ```
 
-The suffix is [configurable](../../lint/configuration.md).
+The suffix is [configurable](../../lint/overview.md#configuration).
 
 All enums should have a zero value. Proto3 does not differentiate between set
 and unset fields, so if an enum field is not explicitly set, it defaults to the
@@ -465,7 +465,7 @@ service FooService {
 }
 ```
 
-There are [configuration options](../../lint/configuration.md) associated with
+There are [configuration options](../../lint/overview.md#configuration) associated with
 these three rules.
 
 ##### `PACKAGE_VERSION_SUFFIX`

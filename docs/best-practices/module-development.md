@@ -1,6 +1,6 @@
 ---
 id: module-development
-title: Module development
+title: Developing modules in the Buf Schema Registry
 ---
 
 The Buf Schema Registry ([BSR](../bsr/overview.mdx)) automatically enforces that

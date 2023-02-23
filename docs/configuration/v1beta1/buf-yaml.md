@@ -229,7 +229,7 @@ doesn't allow this.
 The `lint` key is **optional**, and specifies the `lint` rules enforced on the
 files contained within the module. The `lint` configuration shape is unchanged
 between `v1beta1` and `v1`, so refer to the
-[lint configuration](../../lint/configuration.md) for more information.
+[lint configuration](../../lint/overview.md#configuration) for more information.
 
 ### `breaking`
 

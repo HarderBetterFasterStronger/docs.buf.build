@@ -58,6 +58,7 @@ endif
 	$(SED_I) "s/[0-9].[0-9][0-9]*\.[0-9][0-9]*/$(VERSION)/g" docs/installation.mdx
 	$(SED_I) "0,/[0-9].[0-9][0-9]*\.[0-9][0-9]*/s//$(VERSION)/" docs/tutorials/getting-started-with-bsr.md
 	$(SED_I) "0,/[0-9].[0-9][0-9]*\.[0-9][0-9]*/s//$(VERSION)/" docs/tutorials/getting-started-with-buf-cli.md
+	$(SED_I) "0,/[0-9].[0-9][0-9]*\.[0-9][0-9]*/s//$(VERSION)/" docs/how-to/use-remote-packages.md
 	$(SED_I) "s/version: \"[0-9].[0-9][0-9]*\.[0-9][0-9]*\"/version: \"$(VERSION)\"/g" docs/ci-cd/github-actions.md
 	$(SED_I) "s/version = \"v[0-9].[0-9][0-9]*\.[0-9][0-9]*\"/version = \"v$(VERSION)\"/g" docs/build-systems/bazel.md
 	$(SED_I) "s/BUF_VERSION=[0-9].[0-9][0-9]*\.[0-9][0-9]*/BUF_VERSION=$(VERSION)/g" docs/ci-cd/setup.mdx

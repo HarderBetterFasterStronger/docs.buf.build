@@ -1,7 +1,8 @@
 ---
 id: managed-mode
-title: Managed mode
+title: Standardize your file options
 ---
+# Standardize your file options with Managed mode
 
 Protobuf enables you to set [file options][file-options] in your `.proto` files
 that dictate aspects of how code is generated from those files. Some file

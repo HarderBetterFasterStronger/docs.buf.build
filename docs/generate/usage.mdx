@@ -1,6 +1,7 @@
 ---
 id: usage
-title: Usage
+title: "Simplify code generation"
+description: "Unlock the simplicity of Buf Generate: A step-by-step guide to revolutionize your development process"
 ---
 
 > We highly recommend completing [the tour](../tutorials/getting-started-with-buf-cli.md#generate-code) to get an
@@ -27,7 +28,7 @@ import Examples from "@site/src/components/Examples";
     ]}
 />
 
-## Configuration
+## 1 Configuration
 
 The [`buf.gen.yaml`](../configuration/v1/buf-gen-yaml.md) template file controls
 how the `buf generate` command executes `protoc` plugins for any
@@ -36,7 +37,7 @@ plugins and, optionally, other file option configurations with
 [managed mode](managed-mode.md). For more information on the `buf.gen.yaml`
 configuration, see the [reference](../configuration/v1/buf-gen-yaml.md).
 
-## Define a module
+## 2 Define a module
 
 To get started, create a [module](../bsr/overview.mdx#modules) by adding a
 [`buf.yaml`](../configuration/v1/buf-yaml.md) file to the root of the directory
@@ -57,14 +58,14 @@ lint:
     - DEFAULT
 ```
 
-## Use Local Plugins
+## 3 Use local plugins
 
 The `buf.gen.yaml` file is used to define a **local plugin template** that
 works directly with the `buf generate` command. In short, the `buf.gen.yaml`
 file is used to easily generate code with `protoc` plugins and simplifies the
 `protoc` experience significantly.
 
-### Create a `buf.gen.yaml`
+### 3.1 Create a `buf.gen.yaml`
 
 Now that you have an [input](../reference/inputs.md) to generate code for, we
 need to define a `buf.gen.yaml` and specify what `protoc` plugins you want to
@@ -95,7 +96,7 @@ plugin has a per-directory parallel invocation, with results from each
 invocation combined before writing the result. For more information, see the
 [`buf.gen.yaml` reference](../configuration/v1/buf-gen-yaml.md).
 
-### Run generate
+### 3.2 Run generate
 
 Run this to generate from the [input](../reference/inputs.md) in your current
 directory:
@@ -136,7 +137,7 @@ $ buf generate --error-format=json
 {"path":"acme/pet/v1/pet.proto","start_line":5,"start_column":8,"end_line":5,"end_column":8,"type":"COMPILE","message":"acme/payment/v1alpha1/payment.proto: does not exist"}
 ```
 
-## Use Remote Plugins
+## 4 Use remote plugins
 
 Stop worrying about how to install your plugins at specific versions and keep
 this consistent across your team, let us take care of that.
@@ -152,7 +153,7 @@ You won't need the locally generated code from before, so you can remove the `ge
 rm -rf gen
 ```
 
-### Modify your `buf.gen.yaml`
+### 4.1 Modify your `buf.gen.yaml`
 
 Now that you have defined a `buf.gen.yaml` and specified what `protoc` plugins
 you want to use. We can now modify the `buf.gen.yaml` for
@@ -175,7 +176,7 @@ plugins:
       - require_unimplemented_servers=false
 ```
 
-### Run generate
+### 4.2 Run generate
 
 Run this to generate from the [input](../reference/inputs.md) in your current
 directory:
@@ -190,7 +191,7 @@ The `buf generate` command will
 - Send the Protobuf files to the Buf Schema Registry for remote plugins and
 respond with your desired source code.
 
-## Common use cases
+## 5 Common use cases
 
 The most common use case is to generate using the current directory as
 [input](../reference/inputs.md):
@@ -203,7 +204,7 @@ This command assumes that a
 [`buf.gen.yaml`](../configuration/v1/buf-gen-yaml.md) exists in the directory
 where you run the command.
 
-### Generating from a Buf module {#from-module}
+### 5.1 Generating from a Buf module {#from-module}
 
 You can generate from a Buf [module](../bsr/overview.mdx#modules) on the
 [Buf Schema Registry](../bsr/introduction.md) (BSR) by providing the module name
@@ -217,7 +218,7 @@ $ buf generate buf.build/acme/petapis
 > For a complete list, see the
 > [Buf input format documentation](../reference/inputs.md#source-formats).
 
-### Generating using multiple templates {#multiple-templates}
+### 5.2 Generating using multiple templates {#multiple-templates}
 
 The [`buf.gen.yaml`](../configuration/v1/buf-gen-yaml.md) file enables you to
 configure one generation template. For cases where you need to use multiple
@@ -240,7 +241,7 @@ $ buf generate --template '{"version":"v1","plugins":[{"plugin":"go","out":"gen/
 $ buf generate --template '{"version":"v1","plugins":[{"plugin":"java","out":"gen/java"}]}'
 ```
 
-### Generating to a specific directory {#output}
+### 5.3 Generating to a specific directory {#output}
 
 You can generate to a specific output directory using the `--output` or `-o`
 flag. This command generates to the `bar/` directory while prepending `bar/` to
@@ -253,7 +254,7 @@ $ buf generate https://github.com/foo/bar.git --template data/generate.yaml -o b
 The paths in the template and the `-o` flag are interpreted as relative to your
 **current directory**, so you can place your template files anywhere.
 
-### Limit to specific files
+### 5.4 Limit to specific files
 
 By default, `buf` builds all files under the `buf.yaml` configuration file. You
 can instead manually specify the file or directory paths to build. This is an
@@ -276,7 +277,7 @@ $ buf generate --path proto/foo/foo.proto --path proto/foo/bar.proto
 $ buf generate https://github.com/foo/bar.git --template data/generate.yaml --path proto/foo
 ```
 
-### Limit to specific types
+### 5.5 Limit to specific types
 
 The `buf generate` output is generated code for the types defined in your Protobuf
 file(s). These can be messages, enums, or even RPC services and methods (if you are
@@ -330,7 +331,7 @@ be configured in `buf.gen.yaml`.
 $ buf generate --include-types buf.alpha.lint.v1.IDPaths
 ```
 
-## Docker
+## 6 Docker
 
 Buf ships a Docker image, [`bufbuild/buf`][image], that enables you to use `buf`
 as part of your Docker workflows. Here's an example of using the image to run
@@ -354,5 +355,17 @@ that includes any required executables as part of the final image.
 
 :::
 
-[image]: https://hub.docker.com/r/bufbuild/buf
-[multi-stage]: https://docs.docker.com/develop/develop-images/multistage-build/
+## Conclusion
+
+In short, Protobuf development can be difficult, but the buf generate command simplifies the process by allowing
+developers to focus on schema definitions rather than complex protoc commands. By creating a buf.gen.yaml file and
+running buf generate, developers can quickly and efficiently generate code. BSR's remote plugins also offer a solution
+to issues caused by differences in compiler versions and custom Protobuf plugins.
+
+## Next steps
+
+For more information on Buf Generate, check out our [manual](/generate/overview). To understand more about remote
+plugins, check out our [explanation](/bsr/remote-plugins/overview).
+
+[image]  https://hub.docker.com/r/bufbuild/buf
+[multi-stage]  https://docs.docker.com/develop/develop-images/multistage-build/

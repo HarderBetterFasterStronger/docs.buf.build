@@ -214,7 +214,7 @@ Corresponds `lint.ignore_only` in `buf`.
 
 Corresponds to `lint.use` and `lint.except` in `buf`.
 
-See the [lint configuration](../lint/configuration.md) documentation for more
+See the [lint configuration](../lint/overview.md#configuration) documentation for more
 details.
 
 ### `lint.file_header`

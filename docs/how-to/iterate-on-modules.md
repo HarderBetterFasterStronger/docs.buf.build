@@ -1,6 +1,7 @@
 ---
 id: iterate-on-modules
-title: Iterate on modules
+title: "Updating protobuf modules with Buf and the BSR"
+description: "Evolve your protobuf schemas: A guide to iterating on modules"
 ---
 
 > For a comprehensive guide on working with
@@ -20,7 +21,7 @@ topics:
 - [BSR](../bsr/overview.mdx)
 - [Workspaces](../reference/workspaces.mdx)
 
-## Edit and push
+## 1 Edit and push
 
 The typical `buf` workflow involves editing your `.proto` files, and verifying
 the changes continue to conform to the configured
@@ -53,7 +54,7 @@ version control references as a way to track corresponding revisions.
 > check out the [GitHub Actions guide](../ci-cd/github-actions.md) to learn
 > more.
 
-## Update dependencies
+## 2 Update dependencies
 
 If your module has any dependencies, you can update your dependencies to their
 latest versions with the `buf mod update` command. This command resolves the
@@ -84,7 +85,7 @@ $ buf mod update
 $ buf build
 ```
 
-## Edit multiple modules
+## 3 Edit multiple modules
 
 As you develop `buf` modules, you might find yourself in a situation where you
 own multiple modules that depend on each other. When you want to make a change
