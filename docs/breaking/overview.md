@@ -14,23 +14,21 @@ Protobuf schema in comparison to a past version of your Protobuf schema. The
 rules are selectable, and split up into logical categories depending on the
 nature of breaking changes you care about:
 
-- `FILE`: Generated source code breaking changes on a per-file basis, that is
-  changes that would break the generated stubs where definitions cannot be moved
-  across files. This makes sure that for languages such as C++ and Python where
-  header files are included, your source code never breaks for a given Protobuf
-  change. This category also verifies wire and JSON compatibility.
-- `PACKAGE`: Generated source code breaking changes on a per-package basis, that
-  is changes that would break the generated stubs, but only accounting for
-  package-level changes. This is useful for languages such as Java (with
-  `option java_multiple_files = true;` set) or Golang where it is fine to move
-  Protobuf types across files, as long as they stay within the same Protobuf
-  package. This category also verifies wire and JSON compatibility.
-- `WIRE`: Wire breaking changes, that is changes that would break wire
-  compatibility, including checks to make sure you reserve deleted types of
-  which re-use in the future could cause wire incompatibilities.
-- `WIRE_JSON`: Wire breaking changes and JSON breaking changes, that is changes
-  that would break either wire compatibility or JSON compatibility. This mostly
-  extends `WIRE` to include field and enum value names.
+- `FILE`: Breaking generated source code on a per-file basis.
+
+- `PACKAGE`: Breaking generated source code changes on a per-package basis.
+
+- `WIRE_JSON`: Breaking wire (binary) or JSON encoding.
+
+- `WIRE`: Breaking wire (binary) encoding.
+
+`FILE` is the strictest, most breakage-detecting category and is the default
+for `buf breaking`. Even though there is no strict subset relationship, you
+can safely assume that passing the `FILE` rules implies you would pass the
+`PACKAGE` rules, and that passing the `PACKAGE` rules implies you would pass
+the `WIRE_JSON` rules, and using the `WIRE_JSON` rules implies you would pass
+the `WIRE` rules. There is no need to specify all of them. [Rules and
+categories](rules.md) covers these concepts in more detail.
 
 Other features of `buf`'s breaking change detector include:
 

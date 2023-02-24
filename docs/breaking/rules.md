@@ -3,89 +3,142 @@ id: rules
 title: Breaking change rules & categories
 ---
 
-As discussed in the overview, `buf` categorizes breaking rules into four main
-categories:
-
-- `FILE`: Generated source code breaking changes on a per-file basis, that is
-  changes that would break the generated stubs where definitions cannot be moved
-  across files. This makes sure that for languages such as C++ and Python where
-  header files are included, your source code never breaks for a given Protobuf
-  change. This category also verifies wire and JSON compatibility.
-- `PACKAGE`: Generated source code breaking changes on a per-package basis, that
-  is changes that would break the generated stubs, but only accounting for
-  package-level changes. This is useful for languages such as Java (with
-  `option java_multiple_files = true;` set) or Golang where it is fine to move
-  Protobuf types across files, as long as they stay within the same Protobuf
-  package. This category also verifies wire and JSON compatibility.
-- `WIRE`: Wire breaking changes, that is changes that would break wire
-  compatibility, including checks to make sure you reserve deleted types of
-  which re-use in the future could cause wire incompatibilities.
-- `WIRE_JSON`: Wire breaking changes and JSON breaking changes, that is changes
-  that would break either wire compatibility or JSON compatibility. This mostly
-  extends `WIRE` to include field and enum value names.
-
 ## Categories
 
-As opposed to lint rules, you generally shouldn't mix and exclude specific
-breaking change rules. Instead, it's best to choose one of the categories:
+`buf` categorizes breaking rules into four categories: `FILE`, `PACKAGE`,
+`WIRE_JSON`, and `WIRE`.
 
-- `FILE`
-- `PACKAGE`
-- `WIRE`
-- `WIRE_JSON`
+- `FILE`: Breaking generated source code on a per-file basis. It'll detect
+  changes that would break the generated stubs where definitions cannot be
+  moved across files.
 
-Choose a category based on these criteria:
+- `PACKAGE`: Breaking generated source code changes on a per-package basis.
+  It'll detect changes that would break the generated stubs, but only
+  accounting for package-level changes.
 
-- If you distribute your generated source code outside a monorepo in any
-  capacity, or want to make sure that consumers of the generated source code
-  don't experience broken builds, use `FILE` or `PACKAGE`. Choose `FILE` if you
-  use (or might use) any languages that generate header files (such as C++ or
-  Python), or `PACKAGE` if you only use languages that generate code on a
-  per-package basis (such as Golang). **If in doubt, choose `FILE`.**
-- If you only use Protobuf within a monorepo and always re-generate, and are OK
-  with refactoring code that consumes the generated source code, use `WIRE` or
-  `WIRE_JSON`. Use `WIRE` if you are sure that you will never use the JSON
-  representation of your Protobuf messages. Use `WIRE_JSON` if there is any JSON
-  usage. Generally, we'd recommend using `WIRE_JSON` if you go this route (this
-  basically just has the effect of not allowing re-use of field and enum value
-  names).
+- `WIRE_JSON`: Breaking wire (binary) or JSON encoding. It'll detect changes
+   that would break either wire compatibility or JSON compatibility.
 
-We recommend using `FILE` or `PACKAGE` (**`FILE` is the default**). Generally,
-the case where you _really_ never use a given Protobuf schema anywhere but a
-single monorepo for an entire organization (and all the organization's external
-customers) is rarer than many think.
+- `WIRE`: Breaking wire (binary) encoding. It'll detect changes that would
+  break wire compatibility, including checks to make sure you reserve deleted
+  types of which re-use in the future could cause wire incompatibilities.
 
-Also as opposed to lint rules, there is not a strict subset relationship between
-the main categories in terms of what rules belong to what categories. In terms
-of strictness, however, the order is:
+As opposed to lint rules, you shouldn't mix and exclude specific breaking
+change rules. Instead it's best to choose one of the four `FILE`, `PACKAGE`,
+`WIRE_JSON`, or `WIRE` categories.
 
-`FILE` > `PACKAGE` > `WIRE_JSON` > `WIRE`
+`FILE` is the most strict category, giving you the most protection. `WIRE` is
+the least strict, but it's the most flexible. When it comes to notifying you
+that your change is going to break something, `FILE` is better than `PACKAGE`
+is better than `WIRE_JSON` is better than `WIRE`.
 
-That is, `FILE` is the strictest, and `WIRE` is the most permissive. Even though
-there is no strict subset relationship, you can safely assume that passing the
-`FILE` rules implies you would pass the `PACKAGE` rules, and that passing the
-`PACKAGE` rules implies you would pass the `WIRE_JSON` rules, and using the
-`WIRE_JSON` rules implies you would pass the `WIRE` rules. There is no need to
-specify all of them.
+If there's any doubt, choose `FILE`. `buf breaking` is feedback for you, the
+Protobuf service and message author, that your changes may break your program
+or others' programs. You always have the option of being less strict later.
 
-As an example of how this works, consider the rules `ENUM_NO_DELETE` and
-`PACKAGE_ENUM_NO_DELETE`. `ENUM_NO_DELETE` is in the `FILE` category, and checks
-that for each file, no enum is deleted. `PACKAGE_NO_DELETE` is in the `PACKAGE`
-category, and checks that for a given package, no enum is deleted, however enums
-are allowed to move between files within a package. Given these definitions, and
-given that a file does not change its package (which is checked by
-`FILE_SAME_PACKAGE`, also included in every category), it is obvious that
-passing `ENUM_NO_DELETE` implies passing `PACKAGE_ENUM_NO_DELETE`.
+These categories are not subsets of each other; don't expect similar sets of
+errors with them. As an example of how this works, consider the rules
+`ENUM_NO_DELETE` and `PACKAGE_ENUM_NO_DELETE`. `ENUM_NO_DELETE` is in the
+`FILE` category, and checks that for each file, no enum is deleted.
+`PACKAGE_NO_DELETE` is in the `PACKAGE` category, and checks that for a given
+package, no enum is deleted, however enums are allowed to move between files
+within a package. Given these definitions, and given that a file does not
+change its package (which is checked by `FILE_SAME_PACKAGE`, also included in
+every category), it is obvious that passing `ENUM_NO_DELETE` implies passing
+`PACKAGE_ENUM_NO_DELETE`.
 
-As another example, consider `FIELD_NO_DELETE`, a rule in the `FILE` and
-`PACKAGE` categories that checks that no field is deleted from a given message.
-Consider this as opposed to `FIELD_NO_DELETE_UNLESS_NUMBER_RESERVED` (part of
-the `WIRE` and `WIRE_JSON` categories) and
-`FIELD_NO_DELETE_UNLESS_NAME_RESERVED` (part of the `WIRE_JSON` category), rules
-that do not allow field deletion unless the number or name is reserved. Clearly,
-if `FIELD_NO_DELETE` passes (that is, no field is deleted), both
-`FIELD_NO_DELETE_UNLESS_NUMBER_RESERVED` and
-`FIELD_NO_DELETE_UNLESS_NAME_RESERVED` would pass as well.
+See [rules](#rules) for details about individual checks and what categories
+they are in.
+
+### FILE and PACKAGE
+
+`FILE` and `PACKAGE` protects compatibility in generated code. For example,
+deleting an enum or message often removes the corresponding type in generated
+code. Any code that refers to said enum or message will fail to compile.
+
+Let's look at an example. Image you had an `Arena` enum and marked `ARENA_FOO`
+as going away:
+
+```protobuf
+enum Arena {
+  ARENA_UNSPECIFIED = 0;
+  ARENA_FOO = 1 [deprecated = true];
+  ARENA_BAR = 2;
+}
+```
+
+Later you remove the server-unsupported field:
+
+```protobuf
+enum Arena {
+  ARENA_UNSPECIFIED = 0;
+  ARENA_BAR = 2;
+}
+```
+
+This change is perfectly wire compatible but all code that referred to
+`ARENA_FOO` will fail to compile:
+
+```go
+resp, err := service.Visit(
+    ctx,
+    connect.NewRequest(&visitv1.VisitRequest{
+        Arena: visitv1.Arena_ARENA_FOO, // !!!
+    }),
+)
+```
+
+In some cases this is desirable but more commonly you're sharing your proto
+files or generated code to clients that you don't control. You should choose
+`FILE` or `PACKAGE` breaking detection if you want to know when you'll break
+your client's code.
+
+While these rules are code generator specific, use `FILE` to protect all
+generated languages. `FILE` is absolutely necessary for:
+
+ - C++
+ - Python
+
+You may use `PACKAGE` to protect languages which are less sensitive to types
+moving between files within the same package. These include:
+
+ - Go
+
+### WIRE and WIRE_JSON
+
+`WIRE` and `WIRE_JSON` detect breakage of encoded messages. For example:
+
+ - Changing an optional field into a required one. Old messages which do not
+   have that field encoded will fail to read in the new definition.
+
+ - Reserving deleted types of which re-use in the future could cause wire
+   incompatibilities.
+
+`WIRE` and `WIRE_JSON` do not check for breakage in generated source. This is
+advantageous when:
+
+ - You control all of your clients for your service. You're fixing it if it
+   breaks anyway.
+
+ - You want your client's build to break instead of getting errors at run-time.
+   (Hopefully your clients are equally happy to immediately stop what they're
+   doing to fix your service.)
+
+ - All your clients are in a monorepo. You want to see who's depending on
+   deprecated features by a broken build instead of run-time.
+
+ - You are your own client. For example, you're trying to detect issues reading
+   Protobuf encoded messages from older versions of your program that were
+   persisted to disk / other non-volatile storage.
+
+It's recommended to use `WIRE_JSON` over `WIRE` as Protobuf's JSON encoding
+breaks when field names change.
+
+Use `WIRE_JSON` if you're using [Connect](https://connect.build/),
+gRPC-Gateway, or gRPC JSON.
+
+Use the less strict `WIRE` when you can guarantee only binary encoded messages
+are decoded.
 
 ## Rules
 
