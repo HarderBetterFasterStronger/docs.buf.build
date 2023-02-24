@@ -254,7 +254,7 @@ $ rm -r google
 
 Now remove the `google/type/datetime.proto` reference from your [`buf.yaml`](../configuration/v1/buf-yaml.md):
 
-```yaml title="buf.yaml" {6-7}
+```yaml title="buf.yaml" {9-10}
  version: v1
  name: buf.build/<USER>/petapis
  breaking:
@@ -263,8 +263,8 @@ Now remove the `google/type/datetime.proto` reference from your [`buf.yaml`](../
  lint:
    use:
      - DEFAULT
-     - ignore:
-     - - google/type/datetime.proto
+ -  ignore:
+ -    - google/type/datetime.proto
 ```
 
 If you try to build the module in its current state, you will notice an error:
@@ -285,7 +285,7 @@ configure it like this:
  version: v1
  name: buf.build/<USER>/petapis
  +deps:
-   +  - buf.build/googleapis/googleapis
+ +  - buf.build/googleapis/googleapis
  breaking:
    use:
      - FILE
@@ -389,21 +389,21 @@ $ rm -r gen
 
 Start by updating the `buf.gen.yaml` to exclude overriding any Go import statements related to googleapis.
 
-```yaml title="buf.gen.yaml"
+```yaml title="buf.gen.yaml {6-7,9-11}"
  version: v1
  managed:
    enabled: true
    go_package_prefix:
      default: github.com/bufbuild/buf-tour/petstore/gen
  +    except:
-   +      - buf.build/googleapis/googleapis
+ +      - buf.build/googleapis/googleapis
  plugins:
-   - plugin: buf.build/protocolbuffers/go
+ -  - plugin: buf.build/protocolbuffers/go
+ -    out: gen
+ -    opt: paths=source_relative
+   - plugin: buf.build/bufbuild/connect-go
      out: gen
      opt: paths=source_relative
-            - plugin: buf.build/bufbuild/connect-go
-            out: gen
-            opt: paths=source_relative
 ```
 
 ```terminal title="~/.../start/getting-started-with-bsr/"
