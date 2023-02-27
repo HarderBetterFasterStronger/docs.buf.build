@@ -202,3 +202,10 @@ blockquote {
 .swizzled_src-theme-Logo-styles-module {
   min-width: 91px;
 }
+hr, .navbar__border {
+  height: 1px;
+  background-color: black;
+  opacity: 0.1;position: sticky;
+  margin-left: var(--ifm-navbar-padding-horizontal);
+  margin-right: var(--ifm-navbar-padding-horizontal);
+}
