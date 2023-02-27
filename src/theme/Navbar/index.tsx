@@ -76,8 +76,8 @@ function Navbar(): JSX.Element {
   const bufSidebarItems = bufSplitSidebarNavItems(items);
 
   return (
-    <nav>
-     <div ref={navbarRef}
+    <nav
+      ref={navbarRef}
       className={clsx("navbar", "navbar--fixed-top", styles.bufColors, {
         "navbar--dark": style === "dark",
         "navbar--primary": style === "primary",
@@ -161,11 +161,6 @@ function Navbar(): JSX.Element {
             </ul>
           </div>
         </div>
-      </div>
-      </div>
-      <div
-          aria-hidden="true"
-          className="navbar__border">
       </div>
     </nav>
   );
