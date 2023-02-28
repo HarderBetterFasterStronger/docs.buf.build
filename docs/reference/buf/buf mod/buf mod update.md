@@ -14,7 +14,7 @@ $ buf mod update <directory> [flags]
 
 ### Description
 
-Fetch the latest digests for the specified references in the config file, and write them and their transitive dependencies to the buf.lock file. The first argument is the directory of the local module to update. Defaults to &#34;.&#34; if no argument is specified
+Fetch the latest digests for the specified references in the config file, and write them and their transitive dependencies to the buf.lock file. The first argument is the directory of the local module to update. Defaults to &#34;.&#34; if no argument is specified.
  
 
 ### Flags

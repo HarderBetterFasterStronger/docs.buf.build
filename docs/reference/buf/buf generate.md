@@ -93,7 +93,7 @@ By default, buf generate will look for a file of this shape named
 for the set of plugins you want to invoke.
 
 The first argument is the source, module, or image to generate from.
-If no argument is specified, defaults to &#34;.&#34;.
+Defaults to &#34;.&#34; if no argument is specified.
 
 Use buf.gen.yaml as template, current directory as input:
 

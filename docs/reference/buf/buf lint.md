@@ -16,7 +16,7 @@ $ buf lint <input> [flags]
 
 The first argument is the source, module, or Image to lint.
 The first argument must be one of format [bin,dir,git,json,mod,protofile,tar,zip].
-If no argument is specified, defaults to &#34;.&#34;.
+Defaults to &#34;.&#34; if no argument is specified.
  
 
 ### Flags

@@ -34,7 +34,7 @@ $ buf mod [flags]
 * [buf mod ls-breaking-rules](mod/ls-breaking-rules)	 - List breaking rules
 * [buf mod ls-lint-rules](mod/ls-lint-rules)	 - List lint rules
 * [buf mod open](mod/open)	 - Open the module's homepage in a web browser
-* [buf mod prune](mod/prune)	 - Prune unused dependencies from thebuf.lock file
+* [buf mod prune](mod/prune)	 - Prune unused dependencies from the buf.lock file
 * [buf mod update](mod/update)	 - Update a module's dependencies by updating the buf.lock file
 
 ### Parent Command

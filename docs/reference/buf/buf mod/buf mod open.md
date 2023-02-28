@@ -14,7 +14,7 @@ $ buf mod open <directory> [flags]
 
 ### Description
 
-The first argument is the directory of the local module to open. If no argument is specified, defaults to &#34;.&#34;
+The first argument is the directory of the local module to open. Defaults to &#34;.&#34; if no argument is specified.
  
 
 ### Flags

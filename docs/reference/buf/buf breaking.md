@@ -14,9 +14,9 @@ $ buf breaking <input> --against <against-input> [flags]
 
 ### Description
 
-buf breaking makes sure that the &lt;input&gt; location has no breaking changes compared to the &lt;against-input&gt; locationThe first argument is the source, module, or image to check for breaking changes.
+buf breaking makes sure that the &lt;input&gt; location has no breaking changes compared to the &lt;against-input&gt; location. The first argument is the source, module, or image to check for breaking changes.
 The first argument must be one of format [bin,dir,git,json,mod,protofile,tar,zip].
-If no argument is specified, defaults to &#34;.&#34;.
+Defaults to &#34;.&#34; if no argument is specified.
  
 
 ### Flags

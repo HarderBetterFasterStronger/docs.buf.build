@@ -33,7 +33,7 @@ you have the correct version installed.
 ```terminal
 $ buf --version
 ---
-1.14.0
+1.15.0
 ```
 
 ### Clone the Git repository {#clone-the-git-repository}

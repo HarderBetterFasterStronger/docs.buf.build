@@ -36,7 +36,7 @@ Let's check the version of `buf` you'll be using is up-to-date.
 ```terminal
 $ buf --version
 ---
-1.14.0
+1.15.0
 ```
 
 ## Clone the Git repository {#clone-the-git-repository}

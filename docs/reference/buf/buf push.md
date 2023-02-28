@@ -16,7 +16,7 @@ $ buf push <source> [flags]
 
 The first argument is the source to push.
 The first argument must be one of format [dir,git,protofile,tar,zip].
-If no argument is specified, defaults to &#34;.&#34;.
+Defaults to &#34;.&#34; if no argument is specified.
  
 
 ### Flags

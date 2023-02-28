@@ -16,7 +16,7 @@ $ buf export <source> [flags]
 
 The first argument is the source or module to export.
 The first argument must be one of format [dir,git,mod,protofile,tar,zip].
-If no argument is specified, defaults to &#34;.&#34;.
+Defaults to &#34;.&#34; if no argument is specified.
 
 Examples:
 

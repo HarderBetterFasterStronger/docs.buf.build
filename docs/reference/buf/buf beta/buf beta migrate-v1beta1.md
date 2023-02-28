@@ -14,8 +14,8 @@ $ buf beta migrate-v1beta1 <directory> [flags]
 
 ### Description
 
-Migrate any v1beta1 configuration files in the directory to the latest version
-Defaults to the current directory if not specified
+Migrate any v1beta1 configuration files in the directory to the latest version.
+Defaults to the current directory if not specified.
  
 
 ### Flags

@@ -30,7 +30,7 @@ you have the correct version installed.
 ```terminal
 $ buf --version
 ---
-1.14.0
+1.15.0
 ```
 
 ## 1 Push a module

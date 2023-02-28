@@ -24,6 +24,7 @@ $ buf beta studio-agent [flags]
   -h, --help                            help for studio-agent
       --origin string                   The allowed origin for CORS options (default "https://studio.buf.build")
       --port string                     The port to be exposed to accept HTTP requests (default "8080")
+      --private-network                 Use the agent with private network CORS
       --server-cert string              The cert to be used in the server TLS configuration
       --server-key string               The key to be used in the server TLS configuration
 ```

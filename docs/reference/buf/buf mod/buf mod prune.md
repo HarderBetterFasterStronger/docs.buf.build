@@ -5,7 +5,7 @@ sidebar_label: buf mod prune
 sidebar_position: 6
 slug: /reference/cli/buf/mod/prune
 ---
-Prune unused dependencies from thebuf.lock file
+Prune unused dependencies from the buf.lock file
 
 ### Usage
 ```terminal
@@ -14,7 +14,7 @@ $ buf mod prune <directory> [flags]
 
 ### Description
 
-The first argument is the directory of the local module to prune. Defaults to &#34;.&#34; if no argument is specified
+The first argument is the directory of the local module to prune. Defaults to &#34;.&#34; if no argument is specified.
  
 
 ### Flags

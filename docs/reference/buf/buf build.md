@@ -16,7 +16,7 @@ $ buf build <input> [flags]
 
 The first argument is the source or module to build or image to convert.
 The first argument must be one of format [bin,dir,git,json,mod,protofile,tar,zip].
-If no argument is specified, defaults to &#34;.&#34;.
+Defaults to &#34;.&#34; if no argument is specified.
  
 
 ### Flags
