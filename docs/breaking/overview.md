@@ -3,10 +3,19 @@ id: overview
 title: Breaking Change Detection
 ---
 
+> We recommend completing [the tour](/tutorials/getting-started-with-buf-cli#detect-breaking-changes) for an
+> introduction to the `buf breaking` command.
+
 One of the core promises of Protobuf is forwards and backwards compatibility.
 But making sure that your Protobuf schema doesn't introduce breaking changes
 isn't automatic - there are rules you need to follow to ensure that your schema
 remains compatible for its lifetime.
+
+This document provides an overview of `buf breaking`, including its features, architecture, and usage. By following the
+guidelines outlined in this document, you can get started with `buf breaking` and take advantage of its benefits to
+streamline your development process.
+
+## Key Concepts
 
 `buf` provides a breaking change detector through `buf breaking`, which runs a
 set of [breaking rules](rules.md) across the current version of your entire
@@ -46,7 +55,7 @@ Other features of `buf`'s breaking change detector include:
 - **Speed**. `buf`'s
   [internal Protobuf compiler](../reference/internal-compiler.md) utilizes all
   available cores to compile your Protobuf schema, while still maintaining
-  deterministic output. Additionally files are copied into memory before
+  deterministic output. Additionally, files are copied into memory before
   processing. As an unscientific example, `buf` can compile all 2,311 `.proto`
   files in [googleapis](https://github.com/googleapis/googleapis) in about
   _0.8s_ on a four-core machine, as opposed to about 4.3s for `protoc` on the
@@ -55,7 +64,7 @@ Other features of `buf`'s breaking change detector include:
   proportional to the input size, so linting a single file only takes a few
   milliseconds.
 
-## Configuration
+### Configuration
 
 `buf`'s breaking change detector is configured through a
 [`buf.yaml`](../configuration/v1/buf-yaml.md) file that is placed at the root of
@@ -89,7 +98,7 @@ breaking:
   ignore_unstable_packages: true
 ```
 
-### `use`
+#### `use`
 
 The `use` key is **optional**, and lists the rules or categories to use for
 breaking change detection. For example, this selects the `WIRE` breaking
@@ -120,7 +129,7 @@ category.
 
 The default value is the single item `FILE`, which is what we recommend.
 
-### `except`
+#### `except`
 
 The `except` key is **optional**, and removes rules or categories from the `use`
 list. **We do not recommend using this option in general**. For example, this
@@ -136,7 +145,7 @@ breaking:
     - FILE_NO_DELETE
 ```
 
-### `ignore`
+#### `ignore`
 
 The `ignore` key is **optional**, and enables you to exclude directories or
 files from all breaking rules when running `buf breaking`. If a directory is ignored,
@@ -166,7 +175,7 @@ breaking:
     - foo/baz/v1alpha1
 ```
 
-### `ignore_only`
+#### `ignore_only`
 
 The `ignore_only` key is **optional**, and enables you to exclude directories or
 files from specific breaking rules when running `buf breaking` by taking a map
@@ -187,7 +196,7 @@ breaking:
       - foo
 ```
 
-### `ignore_unstable_packages`
+#### `ignore_unstable_packages`
 
 The `ignore_unstable_packages` key is **optional**, and ignores packages with a
 last component that is one of the unstable forms recognized by
@@ -204,7 +213,7 @@ For example, if this option is true, these packages are ignored:
 - `foo.bar.v1beta1`
 - `foo.bar.v1test`
 
-## Default values
+### Default values
 
 If a `buf.yaml` does not exist, or if the `breaking` key isn't configured, Buf
 uses this default configuration:
@@ -216,7 +225,15 @@ breaking:
     - FILE
 ```
 
-### Other Material
+## Conclusion
+
+`buf breaking` is a useful tool for automating your Protobuf builds and simplifying your development process.
+With `buf breaking`, you can ensure that your consumers won't be affected by any unnecessary mistakes leading to
+breaking changes. Remember to incorporate `buf breaking` into your workflow and refine your approach to optimize
+the efficiency and scalability of your development. You can achieve this in CI with the following guides:
+
+- [CI/CD Setup](/ci-cd/setup)
+- [GitHub Actions](/ci-cd/github-actions)
 
 import { Card, Cards } from "@site/src/components/Cards";
 
@@ -234,3 +251,5 @@ import { Card, Cards } from "@site/src/components/Cards";
     description="Reference the available categories, and the individual rules within each category."
   />
 </Cards>
+
+

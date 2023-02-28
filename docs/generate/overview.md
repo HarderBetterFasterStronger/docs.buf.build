@@ -4,7 +4,7 @@ title: Generating code with Buf
 ---
 
 > We recommend completing [the tour](/tutorials/getting-started-with-buf-cli#generate-code) for an
-> overview of the `buf generate` command.
+> introduction to the `buf generate` command.
 
 This guide provides information on how to use `buf generate`, our solution to protobuf code generation. This allows you
 to generate code from your `.proto` files using plugins that can be customized to fit your needs. We include information
@@ -12,7 +12,9 @@ on how to create a [`buf.gen.yaml`][buf-gen-yaml] file that serves as a template
 flags and options to customize the generation process. Additionally, it covers how to specify input paths and modules,
 and provides examples on how to generate code stubs using specific templates.
 
-## What are protoc plugins?
+## Key Concepts
+
+### What are protoc plugins?
 
 Protoc plugins are external programs that implement a specific interface, defined by the protobuf compiler `protoc`, to
 generate code or perform some other custom processing on `.proto` files.
@@ -33,7 +35,7 @@ To use a plugin with `protoc`, the plugin must be installed and available in the
 Invoking `protoc` is needlessly complex and often results in a series of ugly bash scripts checked into a repository
 with invocations shared between team members. It's this solution you will first begin to admire about `buf`.
 
-## Configuration
+### Configuration
 
 If you are new to generating code using `buf`, you might be wondering how to configure your generation templates and
 plugins. This guide provides detailed information about the [`buf.gen.yaml`][buf-gen-yaml] file and plugin configuration.
@@ -59,7 +61,7 @@ you can specify the version of the generation template, as well as the plugins t
 * **Plugins**: This section allows you to specify the plugins to run. You can define the name of the plugin, the output
   directory, and any options to provide to the plugin.
 
-#### Plugins
+### Plugins
 
 The name of the plugin is **required**, and by default, `buf` generate will look for a binary named `protoc-gen-NAME` on
 your `$PATH`. Alternatively, you can use a remote plugin by specifying the remote plugin name.
@@ -84,7 +86,7 @@ in parallel per directory, and the results are combined before being written out
 are processed in the same order as the plugins are specified.
 :::
 
-## Generate
+### Generate Examples
 
 By default, when using buf generate, the tool looks for a file named "buf.gen.yaml" in the current directory. This file
 serves as a template that specifies which plugins to invoke. If no source, module, or image argument is provided, the
@@ -155,5 +157,23 @@ can be used to perform a wide range of tasks.
 and specifying plugins and options, developers can easily generate code for different languages and frameworks. The
 flexibility of `buf` allows developers to customize their code generation by specifying paths and templates. Overall,
 Buf provides a seamless experience for automating code generation and reducing development time.
+
+import { Card, Cards } from "@site/src/components/Cards";
+
+<Cards>
+  <Card
+    image=""
+    name="🚀️ Simplify code generation: A how-to guide"
+    url="/generate/usage"
+    description="Boost Your Productivity with Easy Code Generation using Buf - Learn how right here."
+  />
+  <Card
+    image=""
+    name="🚀 Effortless generation with Buf remote plugins: A how-to guide"
+    url="/bsr/remote-plugins/usage"
+    description="Discover how to use remote plugins in Buf Schema Registry to streamline your Protobuf development."
+  />
+</Cards>
+
 
 [buf-gen-yaml]: /configuration/v1/buf-gen-yaml#plugins

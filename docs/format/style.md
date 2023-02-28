@@ -3,13 +3,18 @@ id: style
 title: Format your proto files
 ---
 
+> We recommend completing [the tour](/tutorials/getting-started-with-buf-cli) for an
+> introduction to the `buf format` command.
+
 One of Buf's primary goals is to enforce consistency across all of Protobuf. The
 [linter](../lint/overview.md) ensures that the APIs themselves conform to a
 strong set of standards, but these standards have nothing to do with the
 structure of the `.proto` source file itself. That's where `buf format` comes
 in.
 
-## Structure
+## Key Concepts
+
+### Structure
 
 Every `.proto` file is formatted in the following order:
 
@@ -55,7 +60,7 @@ message Pet {
 }
 ```
 
-## Indentation
+### Indentation
 
 When necessary, lines are indented by 2 spaces. The level of indentation
 increases whenever the line moves from a type to its children (e.g. moving from
@@ -78,7 +83,7 @@ message Object {
 }
 ```
 
-## Comments & Newlines
+### Comments & Newlines
 
 All comments are preserved, and multiple adjacent newlines are consolidated into
 a single line.
@@ -98,7 +103,7 @@ message Object {
 }
 ```
 
-## Custom Options
+### Custom Options
 
 Comments are preserved in custom options, too.
 
@@ -144,7 +149,7 @@ message List {
 }
 ```
 
-## Composite Types
+### Composite Types
 
 There are several elements that will always be written across multiple lines.
 Aside from the ones we see most frequently (messages, enums, etc), this includes
@@ -158,8 +163,8 @@ package object.v1;
 import "custom/v1/custom.proto";
 
 option (custom.description) =
-  "This is an example of a single string that can be written across multiple"
-  "lines. Like comments, this helps to write long descriptions in a single string."
+"This is an example of a single string that can be written across multiple"
+    "lines. Like comments, this helps to write long descriptions in a single string."
 
 option (custom.object) = {
   id: "123",
@@ -174,7 +179,7 @@ option (custom.list) = {
 }
 ```
 
-## Empty Composite Types
+### Empty Composite Types
 
 If a composite type (e.g. a `message`) is empty, it will be consolidated into a
 single line. However, if the message has comments within it, they will be
@@ -193,7 +198,7 @@ message Bar {
 }
 ```
 
-## Compact Options
+### Compact Options
 
 If a type has a single compact option, it will be formatted in-line. Otherwise,
 the compact options will span multiple lines.
@@ -213,7 +218,7 @@ message Object {
 }
 ```
 
-## Usage 
+### Usage
 
 The `buf format` command rewrites `.proto` files in-place according to an opinionated [style](style.md).
 
@@ -221,7 +226,7 @@ The `buf format` command has no configuration options. There's only one way to f
 every `.proto` file looks and feels the same way. Stop wasting time and energy on deciding how `.proto` files ought to
 be formatted - `buf` decides for you so you don't have to.
 
-## Examples
+### Examples
 
 By default, the [input](../reference/inputs.md) is the current directory and the formatted content is written to stdout.
 For example, given the following `tree`:
@@ -381,3 +386,18 @@ diff -u proto/simple/v1/simple.proto.orig proto/simple/v1/simple.proto
 
 > The -w and -o flags cannot be used together in a single invocation.
 
+## Conclusion
+
+Formatting your Protobuf files using a consistent and standardized style is a critical aspect of ensuring the
+readability and maintainability of your codebase. `buf format` provides a simple and powerful solution for enforcing a
+consistent style across all of your Protobuf files. By following the guidelines outlined in this document, you can learn
+how to customize your formatting rules, configure your `buf format` settings, and integrate this tool into your
+development workflow. With `buf format`, you can ensure that your Protobuf files are easy to read, easy to maintain, and
+adhere to industry best practices. 
+
+Remember to incorporate formatting into your development workflow, and
+continuously refine your approach to improve the overall quality of your codebase. You can achieve this in CI with the
+following guides:
+
+- [CI/CD Setup](/ci-cd/setup)
+- [GitHub Actions](/ci-cd/github-actions)

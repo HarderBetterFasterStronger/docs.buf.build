@@ -3,6 +3,9 @@ id: overview
 title: Enforce Lint Standards
 ---
 
+> We recommend completing [the tour](/tutorials/getting-started-with-buf-cli) for an
+> introduction to the `buf lint` command.
+
 Using a [linter][lint] on your Protobuf sources enables you to enforce
 consistency and keep your API definitions in line with your chosen best
 practices. We recommend enforcing lint [rules](./rules.md) whether you're
@@ -19,6 +22,13 @@ default, the `buf` CLI uses a curated set of lint rules designed to guarantee
 consistency and maintainability across Protobuf schemas of any size and
 purpose&mdash;but without being so opinionated that it restricts you from making
 the design decisions you need to make for your individual APIs.
+
+:::tip
+Run `buf lint --error-format=config-ignore-yaml` to get a minimal set of rules to ignore. You can enable `lint` today
+and come back to fix any issues another day.
+:::
+
+## Key Concepts
 
 Some features of the `buf` CLI's linter:
 
@@ -44,6 +54,8 @@ Some features of the `buf` CLI's linter:
   is especially useful for editor integration. `buf`'s speed is directly
   proportional to the input size, so linting a single file only takes a few
   milliseconds.
+
+### Configuration
 
 You can configure the `buf` CLI's linter with a
 [`buf.yaml`](../configuration/v1/buf-yaml.md) file at the root of the Protobuf
@@ -81,9 +93,9 @@ lint:
 
 For more info, see the [`buf.yaml` reference](../configuration/v1/buf-yaml.md).
 
-## Options
+### Options
 
-### `use`
+#### `use`
 
 The `use` key is **optional** and lists the IDs or categories to use for
 linting. For example, this config applies the [`BASIC`](./rules.md#basic) lint
@@ -105,7 +117,7 @@ use:
   - DEFAULT
 ```
 
-### `except`
+#### `except`
 
 The `except` key is **optional** and removes IDs or categories from the `use`
 list. For example, this config results in all lint rules in the
@@ -134,7 +146,7 @@ lint:
     - BASIC
 ```
 
-### `ignore`
+#### `ignore`
 
 The `ignore` key is **optional** and enables you to exclude directories or files
 from all lint rules when running `buf lint`. If a directory is ignored, then all files
@@ -149,7 +161,7 @@ lint:
     - foo/bar.proto
 ```
 
-### `ignore_only`
+#### `ignore_only`
 
 The `ignore_only` key is **optional** and enables you to exclude directories or
 files from specific lint rules when running `buf lint` by taking a map from lint
@@ -170,7 +182,7 @@ lint:
       - foo
 ```
 
-### `allow_comment_ignores`
+#### `allow_comment_ignores`
 
 The `allow_comment_ignores` key is **optional** and turns on comment-driven
 ignores.
@@ -233,7 +245,7 @@ files via an authors/owners file, for example, you can make sure that `buf.yaml`
 is owned by a top-level repository owner and prevent `allow_comment_ignores`
 from being set, so that `buf` ignores any `buf:lint:ignore` annotations.
 
-### `enum_zero_value_suffix`
+#### `enum_zero_value_suffix`
 
 The `enum_zero_value_suffix` key is **optional**, and controls the behavior of
 the `ENUM_ZERO_VALUE_SUFFIX` lint rule. By default, this rule verifies that the
@@ -256,7 +268,7 @@ enum Foo {
 }
 ```
 
-### `rpc_allow_.*`
+#### `rpc_allow_.*`
 
 The `rpc_allow_same_request_response`,
 `rpc_allow_google_protobuf_empty_requests`, and
@@ -276,8 +288,8 @@ enforces this as part of the `DEFAULT` category by verifying that:
 - All requests and responses are unique across your Protobuf schema.
 - All requests and response messages are named after the RPC, either by naming
   them according to one of these:
-  - `MethodNameRequest/MethodNameResponse`
-  - `ServiceNameMethodNameRequest/ServiceNameMethodNameResponse`
+    - `MethodNameRequest/MethodNameResponse`
+    - `ServiceNameMethodNameRequest/ServiceNameMethodNameResponse`
 
 This service definition, for example, abides by these rules:
 
@@ -318,7 +330,7 @@ service BarService {
 }
 ```
 
-### `service_suffix`
+#### `service_suffix`
 
 The `service_suffix` key is **optional**, and controls the behavior of the
 `SERVICE_SUFFIX` lint rule. By default, this rule verifies that all service
@@ -338,7 +350,7 @@ That config allows this:
 service FooAPI {}
 ```
 
-## Default values
+### Default values
 
 If a `buf.yaml` does not exist, or if the `lint` key is not configured, this
 default configuration is used:
@@ -355,7 +367,17 @@ lint:
   service_suffix: Service
 ```
 
-### Other material
+## Conclusion
+
+In conclusion, linting is an essential step in ensuring the quality and consistency of your Protobuf files.
+With `buf lint`, you have access to an easy-to-use tool that can help you catch and enforce consistency early on in the
+development process. By following the guidelines and best practices outlined in this overview, you can make the most out
+of `buf lint` and produce high-quality Protobuf files that are easier to maintain and scale. Remember to
+incorporate linting into your development workflow, and continuously refine your approach to improve the overall quality
+of your codebase. You can achieve this in CI with the following guides:
+
+- [CI/CD Setup](/ci-cd/setup)
+- [GitHub Actions](/ci-cd/github-actions)
 
 import { Card, Cards } from "@site/src/components/Cards";
 
@@ -376,9 +398,15 @@ import { Card, Cards } from "@site/src/components/Cards";
 
 
 [empty]: https://github.com/protocolbuffers/protobuf/blob/master/src/google/protobuf/empty.proto
+
 [style]: https://developers.google.com/protocol-buffers/docs/style#enums
+
 [wkt]: https://developers.google.com/protocol-buffers/docs/reference/google.protobuf
+
 [cli]: ../installation.mdx
+
 [googleapis]: https://github.com/googleapis/googleapis
+
 [lint]: https://en.wikipedia.org/wiki/Lint_(software)
+
 [protoc]: https://github.com/protocolbuffers/protobuf

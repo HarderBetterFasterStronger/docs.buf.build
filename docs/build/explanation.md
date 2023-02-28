@@ -2,7 +2,11 @@
 id: explanation
 title: Explore Buf Images
 ---
+
 # Diving deep on Protobuf: building an image
+
+> We recommend completing [the tour](/tutorials/getting-started-with-buf-cli) for an
+> introduction to the `buf` command.
 
 Buf Images are a powerful tool for distributing and sharing compiled Protocol Buffer (Protobuf) schemas across your
 organization. They provide a compact and efficient representation of a Protobuf schema, allowing you to easily manage
@@ -10,7 +14,7 @@ the evolution of your schema and ensure compatibility across multiple systems.
 
 In this guide, we'll explain what Buf Images are, how they work, and how you can use them in your projects.
 
-## Concepts
+## Key Concepts
 
 ### What are Buf Images?
 
@@ -192,7 +196,7 @@ in case you need it.
 ### Using protoc output as `buf` input
 
 Since `buf` speaks in terms of [Buf images](/reference/images.md) and
-[`FileDescriptorSet`][filescriptorset]s are images, we can use`protoc` output as
+[`FileDescriptorSet`][filedescriptorset]s are images, we can use`protoc` output as
 `buf` input. Here's an example for [`buf lint`](/lint/usage.mdx):
 
 ```terminal
@@ -213,6 +217,24 @@ across multiple systems. They provide a compact and efficient representation of 
 metadata, and a set of tools for working with your schema.
 
 You can build all Protobuf files from the specified input and output a Buf image using `buf build`.
+
+import { Card, Cards } from "@site/src/components/Cards";
+
+<Cards>
+  <Card
+    image=""
+    name="🚀️ Build your Proto Schema: A how-to guide"
+    url="/build/usage"
+    description="Learn how to efficiently build, compile and package your Protobuf files with Buf's simple and intuitive build system."
+  />
+  <Card
+    image=""
+    name="📚 Build Protobuf files into a Buf image: CLI reference"
+    url="/reference/cli/buf/build"
+    description="Reference the available input and output build options."
+  />
+</Cards>
+
 
 [codegeneratorrequest]: https://github.com/protocolbuffers/protobuf/blob/master/src/google/protobuf/compiler/plugin.proto#L68
 

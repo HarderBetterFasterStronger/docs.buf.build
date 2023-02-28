@@ -4,7 +4,7 @@ title: Build your Proto Schema
 ---
 
 > We highly recommend completing [the tour][the-tour] to get an
-> overview of `buf build`.
+> introduction to `buf build`.
 
 The operations on `buf` are based on protobuf files that are built or compiled. The [linter][linter],
 [breaking change detector][breaking-change-detector], [generator][generator], and  [BSR][bsr] features depend on the

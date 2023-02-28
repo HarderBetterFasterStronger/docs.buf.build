@@ -22,12 +22,11 @@ values={[
 ]}>
 <TabItem value="included">
 
-* `build` - Build Protobuf files into a Buf image
-* `generate` - Generate code with protoc plugins
-* `breaking` - Verify no breaking changes have been made
-* `curl` - Invoke an RPC endpoint, a la 'cURL'
-* `lint` - Run linting on Protobuf files
-* `format` - Format Protobuf files
+* [`build`][build] - Build Protobuf files into a Buf image
+* [`generate`][generate] - Generate code with protoc plugins
+* [`breaking`][breaking] - Verify no breaking changes have been made
+* [`curl`][curl] - Invoke an RPC endpoint, a la 'cURL'
+* [`lint`][lint] & [`format`][format] - Run linting & formating on Protobuf files
 * `convert` - Convert a message from binary to JSON or vice versa
 * `mod`, `registry`, `push` & `export` for all your Buf Schema Registry needs
 
@@ -76,3 +75,10 @@ import { Card, Cards } from "@site/src/components/Cards";
     description="Find information on CLI features"
   />
 </Cards>
+
+[build]: /build/explanation
+[generate]: /generate/overview
+[breaking]: /breaking/overview
+[curl]: /curl/usage
+[lint]: /lint/overview
+[format]: /format/style
