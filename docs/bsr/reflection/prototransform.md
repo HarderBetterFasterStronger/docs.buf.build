@@ -35,7 +35,7 @@ token := os.Getenv("BUF_TOKEN")
 // This client will send requests to the public BSR at api.buf.build.
 client := prototransform.NewDefaultFileDescriptorSetServiceClient(token)
 
-// Create the schema watcher, which downloads then schema and then
+// Create the schema watcher, which downloads a schema and then
 // periodically polls for updates.
 cfg := &prototransform.Config{
     Client:  client,
